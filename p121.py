@@ -3,11 +3,7 @@ import numpy as np
 import time
 import keyboard
 
-fourcc = cv2.VideoWriter_fourcc(*"XVID")
-cv2.VideoWriter("bg_matters.mp4", fourcc, 40.0, (640, 480))
-
 capture = cv2.VideoCapture(0)
-bg = 0
 image = cv2.imread("Background.jpg")
 time.sleep(2)
 
@@ -27,6 +23,7 @@ while(capture.isOpened()):
     f = frame - res
     f = np.where(f == 0, image, f)
   
+    cv2.imshow("Video", frame)
     cv2.imshow("Masked", f)
     if cv2.waitKey(1) and keyboard.is_pressed("q") or keyboard.is_pressed("esc"):
         break
